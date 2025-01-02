@@ -9,9 +9,30 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onLanguage:mdx"
+  ],
+  "contributes": {
+    "languages": [
+      {
+          "id": "mdx",
+          "aliases": ["MDX", "mdx"],
+          "extensions": [".mdx"]
+      }
+    ]
+  },
   "main": "./extension.js",
   "contributes": {
+    "configuration": {
+        "title": "JSON Key Suggestion Settings",
+        "properties": {
+            "jsonKeySuggestion.jsonFilePath": {
+                "type": "string",
+                "default": "",
+                "description": "JSON 파일 경로를 설정합니다. 절대 경로나 워크스페이스 상대 경로를 사용할 수 있습니다."
+            }
+        }
+    },
     "commands": [{
       "command": "json-key-suggestion.helloWorld",
       "title": "Hello World"
