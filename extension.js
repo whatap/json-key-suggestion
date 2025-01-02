@@ -35,23 +35,22 @@ function activate(context) {
                 }
 
                 // 입력된 텍스트 가져오기
-                const linePrefix = document.lineAt(position).text.substr(0, position.character);
+                const linePrefix = document.lineAt(position).text.substr(0, position.character).trim();
 
-                // 특정 패턴 감지 (예: " 또는 key 입력 후)
-                if (!linePrefix.endsWith('$') && !linePrefix.endsWith(':')) {
-                    return [];
-                }
+                // 입력 텍스트를 기준으로 value 검색
+                const matchingItems = Object.entries(jsonData)
+                    .filter(([key, value]) => value.includes(linePrefix)) // value에 입력 텍스트가 포함된 경우
+                    .map(([key, value]) => {
+                        const item = new vscode.CompletionItem(
+                            value, // 팝업에 표시되는 내용은 value로 설정
+                            vscode.CompletionItemKind.Value
+                        );
+                        item.detail = `Key: ${key}`; // 상세 정보에 key를 표시
+                        item.insertText = `"${key}"`; // key를 삽입
+                        return item;
+                    });
 
-                // JSON 키 목록에서 CompletionItem 생성
-                return Object.keys(jsonData).map((key) => {
-                    const item = new vscode.CompletionItem(
-                        key,
-                        vscode.CompletionItemKind.Property
-                    );
-                    item.detail = jsonData[key]; // 키에 대한 상세 설명 (값) 추가
-                    item.insertText = `"${key}"`;
-                    return item;
-                });
+                return matchingItems;
             },
         },
         '$', ':' // 특정 문자 입력 시 자동완성 트리거
