@@ -20,7 +20,7 @@ jobs:
       with:
         node-version: 20
 
-    - name: Install dependencies
+    - name: Install the vsce npm package
       run: |
         npm install
         npm install -g vsce
