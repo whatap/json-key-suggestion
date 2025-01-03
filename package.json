@@ -12,15 +12,6 @@
   "activationEvents": [
     "onLanguage:mdx"
   ],
-  "contributes": {
-    "languages": [
-      {
-          "id": "mdx",
-          "aliases": ["MDX", "mdx"],
-          "extensions": [".mdx"]
-      }
-    ]
-  },
   "main": "./extension.js",
   "contributes": {
     "configuration": {
@@ -33,10 +24,30 @@
             }
         }
     },
-    "commands": [{
-      "command": "json-key-suggestion.helloWorld",
-      "title": "Hello World"
-    }]
+    "contributes": {
+        "languages": [
+            {
+                "id": "mdx",
+                "aliases": ["MDX", "mdx"],
+                "extensions": [".mdx"]
+            },
+            {
+                "id": "markdown",
+                "aliases": ["Markdown", "markdown"],
+                "extensions": [".md"]
+            }
+        ],
+        "commands": [
+            {
+                "command": "jsonKeySuggestion.triggerCompletion",
+                "title": "Trigger JSON Key Suggestion"
+            }
+        ]
+    },
+    "activationEvents": [
+        "onLanguage:mdx",
+        "onLanguage:markdown"
+    ]
   },
   "scripts": {
     "lint": "eslint .",
