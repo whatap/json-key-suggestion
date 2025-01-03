@@ -1,5 +1,7 @@
 # JSON Key Suggestion for MDX and Markdown Files
 
+와탭 테크니컬 라이터를 위한 VS code Extension 입니다.
+
 This Visual Studio Code extension provides intelligent suggestions for JSON keys and values within `sid=""` attributes in `.mdx` and `.md` files. It helps you quickly insert predefined JSON values into your code.
 
 ## Features
