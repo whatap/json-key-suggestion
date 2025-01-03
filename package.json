@@ -15,38 +15,48 @@
   "main": "./extension.js",
   "contributes": {
     "configuration": {
-        "title": "JSON Key Suggestion Settings",
-        "properties": {
-            "jsonKeySuggestion.jsonFilePath": {
-                "type": "string",
-                "default": "",
-                "description": "JSON 파일 경로를 설정합니다. 절대 경로나 워크스페이스 상대 경로를 사용할 수 있습니다."
-            }
+      "title": "JSON Key Suggestion Settings",
+      "properties": {
+        "jsonKeySuggestion.jsonFilePath": {
+          "type": "string",
+          "default": "",
+          "description": "JSON 파일 경로를 설정합니다. 절대 경로나 워크스페이스 상대 경로를 사용할 수 있습니다."
         }
+      }
     },
     "contributes": {
-        "languages": [
-            {
-                "id": "mdx",
-                "aliases": ["MDX", "mdx"],
-                "extensions": [".mdx"]
-            },
-            {
-                "id": "markdown",
-                "aliases": ["Markdown", "markdown"],
-                "extensions": [".md"]
-            }
-        ],
-        "commands": [
-            {
-                "command": "jsonKeySuggestion.triggerCompletion",
-                "title": "Trigger JSON Key Suggestion"
-            }
-        ]
+      "languages": [
+        {
+          "id": "mdx",
+          "aliases": [
+            "MDX",
+            "mdx"
+          ],
+          "extensions": [
+            ".mdx"
+          ]
+        },
+        {
+          "id": "markdown",
+          "aliases": [
+            "Markdown",
+            "markdown"
+          ],
+          "extensions": [
+            ".md"
+          ]
+        }
+      ],
+      "commands": [
+        {
+          "command": "jsonKeySuggestion.triggerCompletion",
+          "title": "Trigger JSON Key Suggestion"
+        }
+      ]
     },
     "activationEvents": [
-        "onLanguage:mdx",
-        "onLanguage:markdown"
+      "onLanguage:mdx",
+      "onLanguage:markdown"
     ]
   },
   "scripts": {
@@ -55,11 +65,14 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.96.0",
     "@types/mocha": "^10.0.10",
     "@types/node": "20.x",
-    "eslint": "^9.16.0",
+    "@types/vscode": "^1.96.0",
     "@vscode/test-cli": "^0.0.10",
-    "@vscode/test-electron": "^2.4.1"
+    "@vscode/test-electron": "^2.4.1",
+    "eslint": "^9.16.0"
+  },
+  "dependencies": {
+    "vsce": "^2.15.0"
   }
 }
