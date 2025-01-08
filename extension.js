@@ -38,16 +38,28 @@ function activate(context) {
             return;
         }
 
-        // 따옴표 안의 텍스트를 감지하는 정규식
-        const pattern = /sid="([^"]*)"/;
-        const match = line.match(pattern);
+        // 커서 위치 기준으로 올바른 sid="..." 감지
+        const pattern = /sid="([^"]*)"/g;
+        let match;
+        let closestMatch = null;
 
-        if (!match) {
-            vscode.window.showInformationMessage('sid="" 패턴을 찾을 수 없습니다.');
+        while ((match = pattern.exec(line)) !== null) {
+            const start = match.index + 5; // `sid="` 이후의 시작 위치
+            const end = start + match[1].length; // 따옴표 안 끝 위치
+
+            // 커서가 현재 `sid="..."` 범위 안에 있는지 확인
+            if (position.character >= start && position.character <= end) {
+                closestMatch = match[1];
+                break;
+            }
+        }
+
+        if (!closestMatch) {
+            vscode.window.showInformationMessage('커서가 sid="..." 범위 안에 있지 않습니다.');
             return;
         }
 
-        const inputText = match[1]; // 따옴표 안의 텍스트
+        const inputText = closestMatch; // 올바르게 감지된 sid="..." 내부 텍스트
 
         // 입력 텍스트를 기준으로 JSON value 검색
         const matchingItems = Object.entries(jsonData)
